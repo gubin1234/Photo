@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="MyPet"></dbname><!--指定数据库名-->
+    <version value="1"></version><!--数据库版本号-->
+
+    <list>
+        <mapping class="com.example.photo.bean.AlarmClockItemInfo"></mapping><!--指定所有的映射模型-->
+    </list>
+</litepal>

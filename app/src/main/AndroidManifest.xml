@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.photo"
+    android:installLocation="internalOnly">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- 相机权限，sdcard读、写、访问相机、震动、闪光灯 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <!-- 蓝牙权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- 悬浮窗 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- 在SD卡中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission."/>
+    <queries>
+        <!-- 打开相册意图-->
+        <intent>
+            <action android:name="android.intent.action.PICK" />
+            <data android:mimeType="image/*" />
+        </intent>
+    </queries>
+    <application
+        android:name=".utils.MyPetApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true"
+        >
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.photo.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.ChangeInfoActivity" />
+        <activity android:name=".activity.NewAlarmClockActivity" />
+        <activity android:name=".activity.SystemRingSelectActivity" />
+        <activity android:name=".activity.LocalMusicSelectActivity" />
+        <activity android:name=".activity.AlarmClockActivity" />
+        <activity android:name=".activity.BlueToothInfoActivity" />
+
+        <service
+            android:name=".service.WeChatListenerService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility" />
+        </service>
+        <!-- 悬浮窗服务注册 -->
+        <service android:name=".service.PetWindowService" />
+        <service
+            android:name=".service.ClockService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".activity.EditAlarmClockActivity" />
+
+        <receiver
+            android:name=".activity.BootCompleteReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".activity.PetInfoActivity" />
+
+        <service
+            android:name=".service.MsgWindowService"
+            android:enabled="true"
+            android:exported="true"></service>
+    </application>
+
+</manifest>
